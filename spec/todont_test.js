@@ -20,4 +20,16 @@ describe('ToDontList',function() {
     expect(scope.items[0].title).toEqual("Test item");
   });
   
+  it("Duck has been included", function() {
+    var Container = duckCtor(_, angular, Q).Container;
+    var injector = angular.injector(["ng", "toDontList"]);
+    var container = new Container(injector, null);
+    runs(function() {
+      container.mvc("ListCtrl", "src/index.html", {$scope: {}}).then(function(mvc) {
+        console.log(mvc);
+      });
+    });
+  });
+
+  
 });

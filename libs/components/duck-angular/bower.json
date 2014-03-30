@@ -1,0 +1,28 @@
+{
+  "name": "duck-angular",
+  "version": "0.0.0",
+  "main": "duck-angular.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "latest",
+    "requirejs": "latest",
+    "requirejs-text": "latest"
+  },
+  "gitHead": "6f7bb897b80fb7595236413b1c9c08447e9bea12",
+  "readme": "duck-angular\n============\n\nGuides to use this are at:\n\n* [Part One](http://avishek.net/blog/?p=1202)\n* [Part Two](http://avishek.net/blog/?p=1188)\n* [Part Three](http://avishek.net/blog/?p=1225)\n* [Part Four](http://avishek.net/blog/?p=1239)\n* [Part Five: Testing Directives](http://avishek.net/blog/?p=1489)\n* [A Quick Recap](http://avishek.net/blog/?p=1472)\n\nAn example AngularJS app using Duck-Angular is at https://github.com/asengupta/AngularJS-RequireJS-Seed in two combinations:\n\n* [Mocha + RequireJS](https://github.com/asengupta/AngularJS-RequireJS-Seed/tree/master)\n* [Jasmine + RequireJS](https://github.com/asengupta/AngularJS-RequireJS-Seed/tree/karma-jasmine)\n\nA container for bootstrapping and testing AngularJS views and controllers in memory: no browser or external process needed.\n\nduck-angular is available as a Bower package. Install it using 'bower install duck-angular'.\n\nInclude it using RequireJS' define(). Your controller/service/object initialisation scripts need to have run before you use Duck-Angular. Put them in script tags, or load them using a script loader like RequireJS or Inject.\n\nUse it in your tests, like so:\n\nHere is an example taken from the [AngularJS-RequireJS Seed app](https://github.com/asengupta/AngularJS-RequireJS-Seed)\n\n    // Using Mocha-as-Promised in this example\n    it(\"can reflect data that is refreshed asynchronously\", function () {\n      return mother.createMvc(\"route2Controller\", \"../templates/route2.html\", {}).then(function (mvc) {\n        var dom = new DuckDOM(mvc.view, mvc.scope);\n        var interaction = new UIInteraction(dom);\n        expect(dom.element(\"#data\")[0].innerText).to.eql(\"Some Data\");\n        dom.interactWith(\"#changeLink\");\n        expect(dom.element(\"#data\")[0].innerText).to.eql(\"Some New Data\");\n        return interaction.with(\"#refreshLink\").waitFor(mvc.scope, \"refreshData\").then(function() {\n          expect(dom.element(\"#data\")[0].innerText).to.eql(\"Some Data\");\n        });\n      });\n    });\n\n\nLicense\n----------\n\nThe MIT License (MIT)\n\nCopyright (c) 2013 Avishek Sen Gupta\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+  "readmeFilename": "README.md",
+  "_id": "duck-angular@0.0.0",
+  "description": "duck-angular ============",
+  "commit": "6f7bb897b80fb7595236413b1c9c08447e9bea12",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/asengupta/duck-angular.git"
+  }
+}

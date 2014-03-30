@@ -14,8 +14,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/app/controllers/*.js',
+      'src/lib/angular.js',
+      'src/lib/q.js',
+      'src/lib/underscore.js',
+      'src/lib/duck-angular.js',
       'src/app/services/*.js',
+      'src/app/controllers/*.js',
+      'src/lib/require.js',
+      'src/lib/text.js',
+      'src/**/*.js',
       'spec/**/*test.js'
     ],
 
