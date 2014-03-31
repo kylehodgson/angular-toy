@@ -1,5 +1,9 @@
 describe('ToDontList',function() {
-  
+    var duckFactory = duckCtor(_, angular, Q);
+    var Container = duckFactory.Container;
+    var DuckDOM = duckFactory.DOM;
+    var injector = angular.injector(["ng", "toDontList"]);
+
   it('Should have a working unit test suite',function() {
     expect(Acme.ListItems).not.toBe(null);
   });
@@ -20,15 +24,11 @@ describe('ToDontList',function() {
     expect(scope.items[0].title).toEqual("Test item");
   });
   
-  it("Duck has been included", function() {
-    var duckFactory = duckCtor(_, angular, Q)
-    var Container = duckFactory.Container;
-    var DuckDOM = duckFactory.DOM;
-    var injector = angular.injector(["ng", "toDontList"]);
-    var container = new Container(injector, null);
+  it("can show items not to do", function() {
+    var container = new Container(injector, {baseUrl: "/base/src", textPluginPath: "lib/text"});
     var done = false;
     runs(function() {
-       container.mvc("ListCtrl", "index.html", {$scope: {}}).then(function(mvc) {
+       container.mvc("ListCtrl", "index.html").then(function(mvc) {
         var dom = new DuckDOM(mvc.view, mvc.scope);
         var listItems = dom.element("ul#list > li");
         expect(listItems.length).toBe(2);
@@ -41,6 +41,22 @@ describe('ToDontList',function() {
     });
     waitsFor(function() {
       return done;
-    })
+    });
+  });
+
+  it("can emulate user interactions", function() {
+    var container = new Container(injector, {baseUrl: "/base/src", textPluginPath: "lib/text"});
+    var done = false;
+    runs(function() {
+       container.mvc("ListCtrl", "index.html").then(function(mvc) {
+        var dom = new DuckDOM(mvc.view, mvc.scope);
+        dom.interactWith("#changeLink");
+        expect(dom.element("#dataStuff").text()).toBe("Num Num");
+        done = true;
+      });
+    });
+    waitsFor(function() {
+      return done;
+    });
   });
 });

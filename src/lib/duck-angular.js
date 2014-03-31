@@ -1,9 +1,11 @@
 var duckCtor = function (_, angular, Q) {
-  var Container = function Container(injector, app) {
-    require.config({
-      baseUrl: "/base/src",
-      paths: { text: "lib/text"}
-    });
+  var Container = function Container(injector, pathOptions) {
+    if (pathOptions) {
+      require.config({
+        baseUrl: pathOptions.baseUrl,
+        paths: { text: pathOptions.textPluginPath}
+      });
+    }
 
     var self = this;
     self.options = {};
@@ -99,6 +101,7 @@ var duckCtor = function (_, angular, Q) {
       require(["text!" + viewUrl], function (viewHTML) {
         // HACK to make sure that ng-controller directives don't cause template to be eaten up
         viewHTML = viewHTML.replace("ng-controller", "no-controller");
+        viewHTML = viewHTML.replace("ng-app", "no-app");
         self.compileTemplate(viewHTML, scope, preRenderBlock).then(function(compiledTemplate) {
           deferred.resolve(compiledTemplate);
         });
@@ -280,10 +283,10 @@ var duckCtor = function (_, angular, Q) {
 };
 
 if (typeof define !== "undefined") {
-  console.log("RequireJS is present");
+  console.log("RequireJS is present, defining AMD module");
   define(["underscore", "angular", "Q"], duckCtor);
 }
 else {
-  console.log("RequireJS is NOT present");
+  console.log("RequireJS is NOT present, defining globally");
   window.duckCtor = duckCtor; 
 }

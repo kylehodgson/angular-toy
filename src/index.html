@@ -17,6 +17,8 @@
 
     <div ng-app="toDontList">
       <div ng-controller="ListCtrl">
+        <div id="dataStuff">{{randomString}}</div>
+        <a href="" id="changeLink" ng-click="changeData()">Change some data</a>
         <ul id="list">
           <li ng-repeat="item in items"><span>{{item.title}}</span><p>{{item.description}}</p></li>
         </ul>

@@ -25,8 +25,7 @@ module.exports = function(config) {
       'spec/**/*test.js',
       'src/lib/require.js',
       {pattern: 'src/lib/text.js', watched: true, included: false, served: true},
-      {pattern: 'src/**/*.html', watched: true, included: false, served: true},
-      {pattern: 'src/**/*.tpl', watched: true, included: false, served: true}
+      {pattern: 'src/**/*.html', watched: true, included: false, served: true}
     ],
 
 
