@@ -25,7 +25,7 @@ describe('ToDontList',function() {
   });
   
   it("can show items not to do", function() {
-    var container = new Container(injector, {baseUrl: "/base/src", textPluginPath: "lib/text"});
+    var container = new Container(injector, null, {baseUrl: "/base/src", textPluginPath: "lib/text"});
     var done = false;
     runs(function() {
        container.mvc("ListCtrl", "index.html").then(function(mvc) {
@@ -45,7 +45,7 @@ describe('ToDontList',function() {
   });
 
   it("can emulate user interactions", function() {
-    var container = new Container(injector, {baseUrl: "/base/src", textPluginPath: "lib/text"});
+    var container = new Container(injector, null, {baseUrl: "/base/src", textPluginPath: "lib/text"});
     var done = false;
     runs(function() {
        container.mvc("ListCtrl", "index.html").then(function(mvc) {

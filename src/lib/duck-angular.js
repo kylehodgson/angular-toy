@@ -1,5 +1,5 @@
 var duckCtor = function (_, angular, Q) {
-  var Container = function Container(injector, pathOptions) {
+  var Container = function Container(injector, app, pathOptions) {
     if (pathOptions) {
       require.config({
         baseUrl: pathOptions.baseUrl,
