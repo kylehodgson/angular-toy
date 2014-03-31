@@ -21,15 +21,26 @@ describe('ToDontList',function() {
   });
   
   it("Duck has been included", function() {
-    var Container = duckCtor(_, angular, Q).Container;
+    var duckFactory = duckCtor(_, angular, Q)
+    var Container = duckFactory.Container;
+    var DuckDOM = duckFactory.DOM;
     var injector = angular.injector(["ng", "toDontList"]);
     var container = new Container(injector, null);
+    var done = false;
     runs(function() {
-      container.mvc("ListCtrl", "src/index.html", {$scope: {}}).then(function(mvc) {
-        console.log(mvc);
+       container.mvc("ListCtrl", "index.html", {$scope: {}}).then(function(mvc) {
+        var dom = new DuckDOM(mvc.view, mvc.scope);
+        var listItems = dom.element("ul#list > li");
+        expect(listItems.length).toBe(2);
+        expect(angular.element("span", listItems[0]).text()).toBe("Item one!");
+        expect(angular.element("p", listItems[0]).text()).toBe("Item one is really cool. But do not do it.");
+        expect(angular.element("span", listItems[1]).text()).toBe("Item two!");
+        expect(angular.element("p", listItems[1]).text()).toBe("Item two is really cool, though not as cool as one. But also do not do it.");
+        done = true;
       });
     });
+    waitsFor(function() {
+      return done;
+    })
   });
-
-  
 });

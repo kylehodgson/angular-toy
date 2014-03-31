@@ -1,5 +1,10 @@
 var duckCtor = function (_, angular, Q) {
   var Container = function Container(injector, app) {
+    require.config({
+      baseUrl: "/base/src",
+      paths: { text: "lib/text"}
+    });
+
     var self = this;
     self.options = {};
     self.injector = injector;
@@ -92,9 +97,14 @@ var duckCtor = function (_, angular, Q) {
     this.view = function (viewUrl, scope, preRenderBlock) {
       var deferred = Q.defer();
       require(["text!" + viewUrl], function (viewHTML) {
+        // HACK to make sure that ng-controller directives don't cause template to be eaten up
+        viewHTML = viewHTML.replace("ng-controller", "no-controller");
         self.compileTemplate(viewHTML, scope, preRenderBlock).then(function(compiledTemplate) {
           deferred.resolve(compiledTemplate);
         });
+      }, function(err) {
+        console.log("Bad things happened");
+        console.log(err);
       });
       return deferred.promise;
     };
@@ -128,7 +138,6 @@ var duckCtor = function (_, angular, Q) {
       var controller = this.controller(controllerName, dependencies);
       var template = this.view(viewUrl, scope, self.options.preRenderHook);
       return Q.spread([controller, template], function (controller, template) {
-
         return self.allPartialsLoadedDeferred.promise.then(function () {
           return { controller: controller, view: template, scope: scope };
         });
@@ -271,8 +280,10 @@ var duckCtor = function (_, angular, Q) {
 };
 
 if (typeof define !== "undefined") {
+  console.log("RequireJS is present");
   define(["underscore", "angular", "Q"], duckCtor);
 }
 else {
+  console.log("RequireJS is NOT present");
   window.duckCtor = duckCtor; 
 }

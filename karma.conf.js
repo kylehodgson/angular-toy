@@ -11,19 +11,22 @@ module.exports = function(config) {
     // frameworks to use
     frameworks: ['jasmine'],
 
-
+    preprocessors: { },
     // list of files / patterns to load in the browser
     files: [
-      'src/lib/angular.js',
       'src/lib/q.js',
+      'src/lib/jquery.js',
+      'src/lib/angular.js',
       'src/lib/underscore.js',
       'src/lib/duck-angular.js',
       'src/app/services/*.js',
       'src/app/controllers/*.js',
+      'src/app/app.js',
+      'spec/**/*test.js',
       'src/lib/require.js',
-      'src/lib/text.js',
-      'src/**/*.js',
-      'spec/**/*test.js'
+      {pattern: 'src/lib/text.js', watched: true, included: false, served: true},
+      {pattern: 'src/**/*.html', watched: true, included: false, served: true},
+      {pattern: 'src/**/*.tpl', watched: true, included: false, served: true}
     ],
 
 
