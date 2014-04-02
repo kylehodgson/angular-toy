@@ -25,17 +25,18 @@ describe('ToDontList',function() {
   });
   
   it("can show items not to do", function() {
-    var container = new Container(injector, null, {baseUrl: "/base/src", textPluginPath: "lib/text"});
+    var container = new Container(
+      injector, null, {baseUrl: "/base/src", textPluginPath: "lib/text"});
     var done = false;
     runs(function() {
-       container.mvc("ListCtrl", "index.html").then(function(mvc) {
+      container.mvc("ListCtrl", "index.html").then(function(mvc) {
         var dom = new DuckDOM(mvc.view, mvc.scope);
         var listItems = dom.element("ul#list > li");
         expect(listItems.length).toBe(2);
         expect(angular.element("span", listItems[0]).text()).toBe("Item one!");
-        expect(angular.element("p", listItems[0]).text()).toBe("Item one is really cool. But do not do it.");
+        expect(angular.element("p", listItems[0]).text()).toBe("Great item.");
         expect(angular.element("span", listItems[1]).text()).toBe("Item two!");
-        expect(angular.element("p", listItems[1]).text()).toBe("Item two is really cool, though not as cool as one. But also do not do it.");
+        expect(angular.element("p", listItems[1]).text()).toBe("Also good!!");
         done = true;
       });
     });
@@ -48,7 +49,7 @@ describe('ToDontList',function() {
     var container = new Container(injector, null, {baseUrl: "/base/src", textPluginPath: "lib/text"});
     var done = false;
     runs(function() {
-       container.mvc("ListCtrl", "index.html").then(function(mvc) {
+        container.mvc("ListCtrl", "index.html").then(function(mvc) {
         var dom = new DuckDOM(mvc.view, mvc.scope);
         dom.interactWith("#changeLink");
         expect(dom.element("#dataStuff").text()).toBe("Num Num");

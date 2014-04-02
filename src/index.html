@@ -19,6 +19,7 @@
       <div ng-controller="ListCtrl">
         <div id="dataStuff">{{randomString}}</div>
         <a href="" id="changeLink" ng-click="changeData()">Change some data</a>
+        <button id="addItem" ng-click="addItem()">Add Item</a>
         <ul id="list">
           <li ng-repeat="item in items"><span>{{item.title}}</span><p>{{item.description}}</p></li>
         </ul>
