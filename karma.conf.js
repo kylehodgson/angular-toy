@@ -21,6 +21,7 @@ module.exports = function(config) {
       'src/lib/duck-angular.js',
       'src/app/services/*.js',
       'src/app/controllers/*.js',
+      'src/app/directives/*.js',
       'src/app/app.js',
       'spec/**/*test.js',
       'src/lib/require.js',

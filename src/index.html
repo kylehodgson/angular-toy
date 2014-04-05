@@ -6,22 +6,19 @@
 
     <h1 id='greeting'>Do Not Do List</h1>
 
-    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js' type='application/javascript'></script>
-    <script src='lib/jquery.js' type='application/javascript'></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/q.js/0.9.2/q.js' type='application/javascript'></script>
-    <script src='lib/underscore.js' type='application/javascript'></script>
-    <script src='lib/duck-angular.js' type='application/javascript'></script>
-    <script src='app/services/list-items-service.js' type='application/javascript'></script>
-    <script src='app/controllers/list-controller.js' type='application/javascript'></script>
+    <script src='lib/angular.js'></script>
+    <script src='app/services/list-items-service.js'></script>
+    <script src='app/controllers/list-controller.js'></script>
+    <script src='app/directives/add-button.js'></script>
     <script src='app/app.js' type='application/javascript'></script>
 
     <div ng-app="toDontList">
       <div ng-controller="ListCtrl">
-        <div id="dataStuff">{{randomString}}</div>
-        <a href="" id="changeLink" ng-click="changeData()">Change some data</a>
-        <button id="addItem" ng-click="addItem()">Add Item</a>
+	    <add-button done="addItem(title, description)"></add-button>
         <ul id="list">
-          <li ng-repeat="item in items"><span>{{item.title}}</span><p>{{item.description}}</p></li>
+          <li ng-repeat="item in items">
+			<span>{{item.title}}</span>
+			<p>{{item.description}}</p></li> 
         </ul>
       </div>
     </div>

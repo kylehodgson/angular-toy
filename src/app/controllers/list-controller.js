@@ -2,10 +2,8 @@ Acme = typeof Acme === "undefined"? {} : Acme;
 
 Acme.ListCtrl = function($scope, ListItems) {
   $scope.items = ListItems.getItems();
-  $scope.randomString = "Birdie";
-
-  $scope.changeData = function() {
-  	console.log("I was fired");
-  	$scope.randomString = "Num Num";
-  };
+  
+  $scope.addItem = function(title,description) {
+    $scope.items.push({title: title, description: description});
+  }
 };
